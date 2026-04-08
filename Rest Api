@@ -1,0 +1,126 @@
+🔹 What is REST API in Spring Boot?
+
+👉 A REST API is a way for two systems to communicate over HTTP.
+
+Client (Consumer) → sends request
+Server (Provider) → sends response
+
+Example:
+
+Browser / Postman → Spring Boot App → Response
+🔹 Why spring-boot-starter-web?
+
+👉 This dependency provides:
+
+Embedded server (Tomcat)
+REST support
+Jackson (JSON conversion)
+DispatcherServlet
+🔹 Important Annotations (Very Important 🔥)
+1️⃣ @RestController
+
+👉 Marks class as REST API
+
+@RestController
+public class MsgRestController { }
+
+✔ Combines:
+
+@Controller
+@ResponseBody (returns JSON/text)
+2️⃣ @GetMapping
+
+👉 Used for GET request (read data)
+
+@GetMapping("/welcome")
+public String getWelcomeMsg() {
+    return "Welcome to REST API..!!";
+}
+
+👉 URL:
+
+http://localhost:8080/welcome
+3️⃣ @RequestParam
+
+👉 Used to read query parameters (key-value)
+
+@GetMapping("/greet")
+public String getGreetMsg(@RequestParam("name") String name) {
+    return name + ", Good Morning..!!";
+}
+
+👉 URL:
+
+http://localhost:8080/greet?name=Rishav
+
+👉 Output:
+
+Rishav, Good Morning..!!
+4️⃣ @PathVariable
+
+👉 Used to read values from URL path
+
+@GetMapping("/user/{id}")
+public String getUser(@PathVariable("id") int id) {
+    return "User ID: " + id;
+}
+
+👉 URL:
+
+/user/101
+5️⃣ @RequestBody
+
+👉 Used to read JSON data from request
+
+@PostMapping("/user")
+public String addUser(@RequestBody User user) {
+    return "User Added: " + user.getName();
+}
+
+👉 Input (JSON):
+
+{
+  "name": "Rishav",
+  "age": 22
+}
+🔹 HTTP Methods (Core Concept 🔥)
+Method	Purpose
+GET	Read data
+POST	Create data
+PUT	Update data
+DELETE	Delete data
+🔹 Important Notes (Very Important for Interview)
+✅ 1. GET
+No request body ❌
+Only query/path params
+✅ 2. POST / PUT / DELETE
+Can have request body
+Used to send JSON/XML
+🔹 Request vs Response Body
+👉 Request Body
+Sent by client
+Contains data (JSON)
+👉 Response Body
+Sent by server
+Contains result (JSON/String)
+🔹 How Flow Works (Important)
+Client sends HTTP request
+Spring Boot receives it
+Controller method executes
+Returns response
+Jackson converts → JSON
+Sent back to client
+🔹 Your Code Explained
+@GetMapping("/welcome")
+public String getWelcomeMsg()
+
+👉 Simple API → returns static message
+
+@GetMapping("/greet")
+public String getGreetMsg(@RequestParam("name") String name)
+
+👉 Dynamic API → takes input from URL
+
+🔥 Interview One-Liner
+
+👉 “Spring Boot REST APIs use annotations like @RestController and @GetMapping to map HTTP requests to Java methods and return responses in JSON format.”
